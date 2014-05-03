@@ -47,14 +47,14 @@ int screenSize = 800; // pico
 PShader fisheye;
 boolean fishOn = false;
 
-// setup
+// setupl
 void setup() {
   //size(screenSize, screenSize, P3D); 
   size(848, 480, P3D); 
   background(0);
   canvas = createGraphics(screenSize, screenSize);
   colorMode(HSB, 360, 100, 100);
-  frameRate(60);
+  frameRate(30);
   canvas.background(0);
   pointerX = width/2;
   pointerY = height/2;
