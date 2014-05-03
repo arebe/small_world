@@ -9,17 +9,15 @@
 //     4.1: added button 1 and abs rz for lights on function
 //     4.2: scrapped syphon
 // v5: more osc controls from pd
-//     5.1: scrapped FFT
+//     5.1: scrapped FFT and fisheye
+
+// mist projection - looks best with lights on -- shadow creatures
 
 // press "l" for lights on; press "o" for lights off
-// press "f" for fisheye on 
 
 // libraries
-import codeanticode.syphon.*;
 import oscP5.*;
 import netP5.*;
-import ddf.minim.analysis.*;
-import ddf.minim.*;
 
 // canvas created for interaction w syphon server
 PGraphics canvas;
@@ -43,10 +41,6 @@ int lightsHue = 0;
 //int screenSize = 600; // testing
 int screenSize = 800; // pico
 
-// fisheye 
-PShader fisheye;
-boolean fishOn = false;
-
 // setup
 void setup() {
   //size(screenSize, screenSize, P3D); 
@@ -54,7 +48,7 @@ void setup() {
   background(0);
   canvas = createGraphics(screenSize, screenSize);
   colorMode(HSB, 360, 100, 100);
-  frameRate(60);
+  frameRate(30);
   canvas.background(0);
   pointerX = width/2;
   pointerY = height/2;
@@ -62,9 +56,6 @@ void setup() {
   initPS();
   // init path to calculate mouse movement
   path = new Path(pointerX, pointerY);
-  // set up fisheye shader
-  fisheye = loadShader("FishEye.glsl");
-  fisheye.set("aperture", 180.0);
   // initialize osc port
   oscP5 = new OscP5(this, 12000); // listen to port 12000
 }
@@ -94,9 +85,6 @@ void draw() {
     drawPS();
   }
   canvas.endDraw();
-  if (fishOn) {
-    shader(fisheye);
-  }
   image(canvas, 0, 0);
 }
 
@@ -149,9 +137,6 @@ void keyPressed() {
     break;
   case 'o':
     lightsOff();
-    break;
-  case 'f':
-    fishOn = true;
     break;
   case 's':
     if(scatterOn){
