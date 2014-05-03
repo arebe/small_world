@@ -1,14 +1,14 @@
 class ParticleSystem{
   ArrayList<Particle> particles;
   PVector psOrigin;
-  int pStrokeWeight = 3;
+  int pStrokeWeight = 5;
   int prox = 20;
-  color pColor = color(220,50,255);
+  color pColor = color(220,50,100);
   
   ParticleSystem(PVector l){
    psOrigin = l;
    particles = new ArrayList();
-   int incr = 30;
+   int incr = 20;
    for (int i = 0; i < width; i += incr){
      for (int j = 0; j < height; j+= incr){
        addParticle(new PVector(i, j));

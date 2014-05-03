@@ -35,7 +35,7 @@ int pointerXincr = 0;
 int pointerYincr = 0;
 float pSize;
 boolean scatterOn = false;
-boolean lightsOn = false;
+boolean lightsOn = true;
 int lightsHue = 0;
 //int screenSize = 2048; // bleep
 //int screenSize = 600; // testing
@@ -164,7 +164,7 @@ void oscEvent(OscMessage message){
     if(message.checkTypetag("iii")){
       pointerXincr = int(map(message.get(0).intValue(), 0, 1023, -incr, incr));
       pointerYincr = int(map(message.get(1).intValue(), 0, 1023, -incr, incr));
-      lightsHue = int(map(message.get(2).intValue(), 0, 255, 0, 360));
+      lightsHue = int(map(message.get(2).intValue(), 0, 255, 136, 202));
     }
   }
   else if(message.checkAddrPattern("/joy_btn_0")==true){
